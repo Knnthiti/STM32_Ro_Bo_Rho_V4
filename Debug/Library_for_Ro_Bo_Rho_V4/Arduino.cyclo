@@ -1,0 +1,3 @@
+../Library_for_Ro_Bo_Rho_V4/Arduino.c:9:6:digitalWrite	86
+../Library_for_Ro_Bo_Rho_V4/Arduino.c:110:9:digitalRead	86
+../Library_for_Ro_Bo_Rho_V4/Arduino.c:373:7:map	1
