@@ -164,8 +164,8 @@ int main(void)
 	Motor_setup_RF(&htim11, &htim8, "PE01");
 	Motor_setup_RB(&htim12, &htim4, "PD09");
 
-	Motor_setup_EXTRA2(&htim9, &htim3, "PC13");
 	Motor_setup_EXTRA1(&htim10, &htim2, "PE00");
+	Motor_setup_EXTRA2(&htim9, &htim3, "PC13");
 
 	//	HAL_TIMEx_PWMN_Start(&htim9, TIM_CHANNEL_2);
 
@@ -202,45 +202,12 @@ int main(void)
 			PastTime = uwTick;
 
 			digitalWrite("PE15", (UART_Runner(&huart2) == 1) ? 1 : 0);
-//			if (((uwTick - last_uart_data_time) < UART_TIMEOUT_MS)
-//					&& (Str_PS2.Header[0] == 'R')
-//					&& (Str_PS2.Header[1] == 'B')) {
-//				digitalWrite("PE15", 1);
-//
-//				Str_PS2.Header[0] = 0;
-//				Str_PS2.Header[1] = 0;
-//			} else {
-//				if (!uart_resetting
-//						&& ((uwTick - last_uart_data_time) > UART_TIMEOUT_MS)) {
-//					uart_resetting = 1; // ตั้ง flag เพื่อป้อง�?ัน reset ซ้ำซ้อน
-//
-//					HAL_UART_DeInit(&huart2);
-//					HAL_Delay(10);
-//					MX_USART2_UART_Init();
-//
-//					HAL_UART_Receive_IT(&huart2, (uint8_t*) &Str_PS2,
-//							sizeof(Str_PS2));
-//					//	    	        HAL_UART_Receive_IT(&huart2, (uint8_t *)&temp_buffer, 1);
-//
-//					memset(&Str_PS2, 0, sizeof(Str_PS2));
-//
-//					digitalWrite("PE15", 0);
-//				}
-//				// หยุดมอเตอร์เพื่อความปลอดภัย
-//				Motor_DutyCycle_LF(0);
-//				Motor_DutyCycle_LB(0);
-//				Motor_DutyCycle_RF(0);
-//				Motor_DutyCycle_RB(0);
-//
-//				Motor_DutyCycle_EXTRA1(0);
-//				Motor_DutyCycle_EXTRA2(0);
-//			}
 
 			Vx = map(Str_PS2.stickValue[0], 100.0f, -100.0f, 4.0f, -4.0f);
 			Vy = map(Str_PS2.stickValue[1], 100.0f, -100.0f, 4.0f, -4.0f);
 			Vz = map(Str_PS2.stickValue[3], 100.0f, -100.0f, -5.0f, 5.0f);
 
-			//			Inverse_Kinematic(Vx, Vy, Vz);
+//			Inverse_Kinematic(Vx, Vy, Vz);
 			Inverse_Kinematic_Lock_Direction(Vx, Vy, Vz, Rad);
 
 			Motor_Speed_LF(getRad_s_to_RPM(get_w_LF()),getRPM_TIM_Wheel(&htim5, _LF));
@@ -248,31 +215,38 @@ int main(void)
 			Motor_Speed_RF(getRad_s_to_RPM(get_w_RF()),getRPM_TIM_Wheel(&htim8, _RF));
 			Motor_Speed_RB(getRad_s_to_RPM(get_w_RB()),getRPM_TIM_Wheel(&htim4, _RB));
 
-			//			Ramp_Count(-135.0 ,Count_to_degree(getCount(&htim2 ,_EXTRA1)));
-			//			Motor_DutyCycle_EXTRA1(_DutyCycle);
+			Game_Play_ROBOT_1(&htim9 ,&htim2);
 
 			///////////////////////////////////////////test//////////////////////////////////////////////////////////////
 
-			//			Motor_Speed_LF(250,getRPM_TIM_Wheel(&htim5, _LF));
-			//			Motor_Speed_LB(250,getRPM_TIM_Wheel(&htim1, _LB));
-			//			Motor_Speed_RF(250,getRPM_TIM_Wheel(&htim8, _RF));
-			//			Motor_Speed_RB(250,getRPM_TIM_Wheel(&htim4, _RB));
+//			Motor_Speed_LF(250, getRPM_TIM_Wheel(&htim5, _LF));
+//			Motor_Speed_LB(250, getRPM_TIM_Wheel(&htim1, _LB));
+//			Motor_Speed_RF(250, getRPM_TIM_Wheel(&htim8, _RF));
+//			Motor_Speed_RB(250, getRPM_TIM_Wheel(&htim4, _RB));
+//
+//			Motor_DutyCycle_LF(4000);
+//			Motor_DutyCycle_LB(4000);
+//			Motor_DutyCycle_RF(4000);
+//			Motor_DutyCycle_RB(4000);
+//
+//			Motor_DutyCycle_EXTRA1(-4000);
+//			Motor_DutyCycle_EXTRA2(4000);
+//
+//			getCount(&htim2, _EXTRA1);
+//			getCount(&htim3, _EXTRA2);
+//
+//			getRPM_TIM_Wheel(&htim5, _LF);
+//			getRPM_TIM_Wheel(&htim1, _LB);
+//			getRPM_TIM_Wheel(&htim8, _RF);
+//			getRPM_TIM_Wheel(&htim4, _RB);
 
-			//			Motor_DutyCycle_LF(4000);
-			//			Motor_DutyCycle_LB(4000);
-			//			Motor_DutyCycle_RF(4000);
-			//			Motor_DutyCycle_RB(4000);
+//			getRPM_TIM_Wheel(&htim2, _EXTRA1);
+//			getRPM_TIM_Wheel(&htim3, _RB);
 
-			//			Motor_DutyCycle_EXTRA1(4000);
-			//			Motor_DutyCycle_EXTRA2(4000);
-			//
-			//			getCount(&htim2 ,_EXTRA1);
-			//			getCount(&htim3 ,_EXTRA2);
+//			Vx = digitalRead("PA04");
 
-			//			getRPM_TIM_Wheel(&htim5, _LF);
-			//			getRPM_TIM_Wheel(&htim1, _LB);
-			//			getRPM_TIM_Wheel(&htim8, _RF);
-			//			getRPM_TIM_Wheel(&htim4, _RB);
+//			Motor_DutyCycle_EXTRA1(Ramp_Count(-135.0 ,Count_to_degree(getCount(&htim2 ,_EXTRA1))));
+//			Motor_DutyCycle(&htim9, Servo1, "PB00", 2000);
 
 			///////////////////////////////////////////test//////////////////////////////////////////////////////////////
 
@@ -365,7 +339,7 @@ static void MX_ADC1_Init(void)
 
   /** Configure for the selected ADC regular channel its corresponding rank in the sequencer and its sample time.
   */
-  sConfig.Channel = ADC_CHANNEL_4;
+  sConfig.Channel = ADC_CHANNEL_5;
   sConfig.Rank = 1;
   sConfig.SamplingTime = ADC_SAMPLETIME_3CYCLES;
   if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
@@ -1136,6 +1110,12 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(EXTRA1_DIGI_R_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : PA4 */
+  GPIO_InitStruct.Pin = GPIO_PIN_4;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
   /*Configure GPIO pin : LF_DIGI_R_Pin */
   GPIO_InitStruct.Pin = LF_DIGI_R_Pin;

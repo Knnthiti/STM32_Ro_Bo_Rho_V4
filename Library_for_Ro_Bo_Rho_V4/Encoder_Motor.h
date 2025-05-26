@@ -45,6 +45,14 @@ void Motor_DutyCycle_RB(int16_t DutyCycle_RB);
 void Motor_DutyCycle_EXTRA1(int16_t DutyCycle_EXTRA1);
 void Motor_DutyCycle_EXTRA2(int16_t DutyCycle_EXTRA2);
 
+typedef enum{
+	Servo1 = 0,
+	Servo2 = 1,
+}PWM_num;
+
+extern PWM_num _num;
+void Motor_DutyCycle(TIM_HandleTypeDef *PIN_PWM ,PWM_num Num ,char* DIGI ,int16_t DutyCycle);
+
 
 typedef struct{
 	uint16_t _freq;

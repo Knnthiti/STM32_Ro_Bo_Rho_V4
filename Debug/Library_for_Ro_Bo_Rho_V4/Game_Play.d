@@ -39,7 +39,9 @@ Library_for_Ro_Bo_Rho_V4/Game_Play.o: \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h \
  ../Library_for_Ro_Bo_Rho_V4/Encoder_Motor.h \
- ../Library_for_Ro_Bo_Rho_V4/Arduino.h
+ ../Library_for_Ro_Bo_Rho_V4/Arduino.h \
+ ../Library_for_Ro_Bo_Rho_V4/UART_ESP.h \
+ ../Library_for_Ro_Bo_Rho_V4/Ramp_Robot.h
 ../Library_for_Ro_Bo_Rho_V4/Game_Play.h:
 ../Core/Inc/main.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
@@ -81,3 +83,5 @@ Library_for_Ro_Bo_Rho_V4/Game_Play.o: \
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h:
 ../Library_for_Ro_Bo_Rho_V4/Encoder_Motor.h:
 ../Library_for_Ro_Bo_Rho_V4/Arduino.h:
+../Library_for_Ro_Bo_Rho_V4/UART_ESP.h:
+../Library_for_Ro_Bo_Rho_V4/Ramp_Robot.h:
